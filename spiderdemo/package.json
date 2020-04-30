@@ -1,0 +1,16 @@
+{
+  "name": "spiderdemo",
+  "version": "1.0.0",
+  "description": "https://www.liujiaweb.com/354.html",
+  "main": "index.js",
+  "dependencies": {
+    "puppeteer": "^3.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
