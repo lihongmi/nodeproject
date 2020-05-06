@@ -15,7 +15,7 @@ var transporter = nodemailer.createTransport({
  let sendTime = moment().format('MMMM Do YYYY, h:mm:ss a');
   var mailOptions = { 
     from: 'XXX@163.com',  // 发件人邮箱地址
-    to: 'XXX@qq.com,XXX@qq.com',     // 收件人邮箱地址
+    to: 'XXX@qq.com,XXX@qq.com',     // //收件人邮箱，多个邮箱地址间用','隔开
     subject: '欢迎来关注公众号 ITvlog',      // 邮件标题
     /* text: 
     `
