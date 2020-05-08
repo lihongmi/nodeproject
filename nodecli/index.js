@@ -2,6 +2,8 @@
 const {spawn}=require('child_process')
 const program = require('commander');
 const clone = require('git-clone');
+const download = require('download-git-repo');
+
 const shell = require('shelljs');
 const open=require('open')
 
@@ -12,12 +14,11 @@ const chalk = require('chalk');
 let version = require('./package.json').version;
 program.version(version, '-v, --version')
 
-let newpjname=name=>{
+let newpj=name=>{
     let giturl='git@github.com:vuejs/vue-next-webpack-preview.git'
-    clone(giturl,`./${name}`,null, function() {
+    download(giturl, './${name}', function (err) {
         shell.rm('-rf', `${name}/.git`);
         shell.cd(name)
-
         shell.exec('npm install')
         clear();
         console.log(chalk.red(`
@@ -25,15 +26,13 @@ let newpjname=name=>{
                 cd ${name} 进入项目
                 mycli start 启动项目
         `))
-    
-       
     })
+    //clone(giturl,`./${name}`,null, function() {})
 }
 
 
 
 let run=()=>{
-    
    // shell.exec('npm run dev')
     let cp=spawn('npm',['run','dev'])
     cp.stdout.pipe(process.stdout)
@@ -52,7 +51,7 @@ let start=async ()=>{
 
 program.command('new <name>')
     .description('初始化项目')
-    .action(newpjname);
+    .action(newpj);
 program.command('start')
     .description('运行项目')
     .action(run);
