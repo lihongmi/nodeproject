@@ -1,0 +1,16 @@
+{
+  "name": "githubApi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node dest/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/request": "^2.48.4",
+    "request": "^2.88.2"
+  }
+}
