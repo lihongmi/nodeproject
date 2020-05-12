@@ -1,0 +1,19 @@
+{
+  "name": "fileSliceUpload",
+  "version": "1.0.0",
+  "description": "https://developer.51cto.com/art/202004/613728.htm https://blog.csdn.net/x746655242/article/details/52964623 https://blog.csdn.net/lucky541788/article/details/99686392 https://blog.csdn.net/weixin_34381666/article/details/91372207 https://www.jianshu.com/p/cbfb693e4b36 https://segmentfault.com/q/1010000016741599/a-1020000016770813",
+  "main": " hash.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "fs-extra": "^9.0.0",
+    "multiparty": "^4.2.1"
+  }
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>文件分片上传</title>
+    <script src="axios.min.js"></script>
+</head>
+
+<body>
+    <input type="file" id="btnFile">
+    <button onclick="upload(0)">上传</button>
+    <script>
+        let chunkSize = 2 * 1024 * 1024;
+        var btnFile = document.querySelector('#btnFile')
+        var btnUpload = document.querySelector('#btnUpload')
+
+        function upload(index) {
+            console.log(index);
+            let f = btnFile.files[0];
+            let [fname, fext] = f.name.split('.');
+
+            let start = index * chunkSize;
+            if (start > f.size) {
+                merge(f.name)
+                return;
+            }
+
+            let blob = f.slice(start, start + chunkSize);
+            let blobName = `${fname}.${index}.${fext}`
+            let blobFile = new File([blob], blobName)
+
+            let formData = new FormData();
+            formData.append("file", blobFile);
+            axios.post('/upload', formData).then(res => {
+                console.log(index, res)
+                upload(++index)
+            });
+        }
+        function merge(name) {
+
+            axios.post('/merge', { name: name }).then((res) => {
+                console.log(res)
+            });
+        }
+
+
+    </script>
+    </div>
+</body>
+
+</html>
