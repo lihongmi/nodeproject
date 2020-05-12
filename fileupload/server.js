@@ -50,5 +50,5 @@ app.post('/merge', async function (req, res) {
     res.send({msg:'合并成功',url:`http://localhost:3000/upload/${name}`})
 })
 app.listen(3000)
-console.log('server start')
+console.log("listen 3000");
 
