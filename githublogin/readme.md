@@ -1,7 +1,7 @@
 前奏
 
 开发网站常常需要实现GitHub第三方登录
-3分钟 使用 nodejs koa完成github授权登录
+3分钟使用 Node.js Koa完成GitHub授权登录
 
 
 一。

@@ -1,22 +1,107 @@
 前奏
+基于Node.js的大文件分片上传
+
+文件上传的时候，如果文件过大，可能会导致请求超时的情况。
+就需要对文件进行分片上传的操作
+
+带大家极速实现基于Node.js的大文件分片上传
 
 1.
-mkdir chunkupload
-cd chunkupload
-npm init -y
-npm install express multiparty body-parser fs-extra
-mkdir public temp
-touch server.js public/index.html
+创建演示项目
+初始化package.json
+安装依赖模块
+express web模块
+multiparty 上传模块
+body-parser 处理post请求模块
+fs-extra 好用的文件操作模块
 
-2.先实现简单的文件上传
+新建静态文件目录public和上传存储临时目录temp
+新建 服务端文件server.js 上传网页index.html
+code 打开我们的项目
 
-3.文件分片上传
+2.
+我们先实现服务端的上传功能
+导入我们安装的模块
+创建express 实例
+设置静态文件目录
+使用body-parser 请求体解析中间件
+定义上传路由
+multiparty模块 用来处理上传文件的 定义存储目录temp
+运行项目
+body-parser 一个option参数过期
+调整参数
+运行项目
+项目启动成功
 
-4.合并分片 返回正确的url
+接下来编写上传页面
+书写一个上传的表单元素和一个上传按钮
+点击上传按钮执行上传函数
+上传需要ajax请求  我们使用axios
+获取文件上传表单
+构建formData对象
+axios 请求upload接口 传递我们的form对象
+访问网页
+我们上传一个文件
+点击上传
+可以看到服务端temp存储了上传的文件 文件名字重命名了
+
+
+3.
+如果文件过大 我们需要分片上传
+接下来我们完成分片上传功能
+每一个区块是1M
+
+index表示第几个区块
+获取区块的内容
+把区块转成file文件用来进行上传
+给我们的区块命名
+命名规则是  原文件名.区块索引.文件类型
+formData 换成我们的区块文件
+当第一个区块上传成功递归上传下一个区块
+当区块没有内容 停止递归上传
+点击按钮上传第一个区块
+选择一个视频上传
+服务端可以看到我们的分片视频上传到了存储目录
+
+接下来我们服务端应该把每个文件的所有分片统一放到一个目录里
+定义一个和文件同名的存放目录
+分片按索引编号再次命名
+将分片从临时目录移动到 同名的存放目录
+
+
+上传文件
+可以看到分片 
+但是存储目录名不对
+存储目录名根据区块文件名定义的
+这里是一个数组解构
+重新上传文件
+可以看到分片文件按索引命名并存储到文件同名文件夹
+
+4.
+接下来 合并分片 返回正确的url
+定义合并路由merge 
+
+根据传递的文件名 进行合并
+获取文件的所有分片
+分片按索引进行排序
+合并文件
+合并完成后  删除分片目录
+返回 合并成功文件的url地址
+
+html页面 定义调用合并路由的函数merge
+当所有分片上传完调用
+
+
+5.
+重新上传文件
+上传完分片调用了merge请求
+返回了合并的文件url
+浏览器看下url 可以访问
+服务端同样看到合并的文件
+
+
 
 参考
-
-
 
 点击上传时，检查是否需要上传和已上传的切片。
 点击暂停后的恢复上传，返回已上传的切片。
@@ -40,3 +125,21 @@ https://blog.csdn.net/weixin_34381666/article/details/91372207
 https://www.jianshu.com/p/cbfb693e4b36
 https://segmentfault.com/q/1010000016741599/a-1020000016770813
 
+
+
+https://blog.csdn.net/xiazhiqiang01/article/details/52677484
+https://blog.csdn.net/weixin_34381666/article/details/91372207
+
+https://www.bilibili.com/video/BV1P7411G7AN?p=2
+
+https://segmentfault.com/a/1190000014827408
+
+https://juejin.im/post/599804e1f265da24934aeee7#heading-4
+
+https://juejin.im/post/5ebb4346e51d451ef53793ad#heading-8
+https://juejin.im/post/5e734e90f265da571e263c5e
+https://juejin.im/post/5e1c2f176fb9a0300a44fd2f#heading-4
+
+https://juejin.im/post/5db29beb5188256467245a7b#heading-3
+
+https://www.cnblogs.com/sghy/p/9143955.html
